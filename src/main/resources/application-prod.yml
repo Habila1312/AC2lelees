@@ -6,10 +6,22 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-      
-     
-hikari:
-      connection-timeout: 30000  # Tempo de espera para a conexão (em milissegundos)
-      maximum-pool-size: 5       # Tamanho máximo do pool de conexões
-      max-lifetime: 1800000      # Tempo máximo de vida para uma conexão no pool
-      idle-timeout: 600000       # Tempo de inatividade antes de uma conexão ser descartada
+  hikari:
+    connection-timeout: 30000  # Tempo de espera para a conexão (em milissegundos)
+    maximum-pool-size: 5       # Tamanho máximo do pool de conexões
+    max-lifetime: 1800000      # Tempo máximo de vida para uma conexão no pool
+    idle-timeout: 600000       # Tempo de inatividade antes de uma conexão ser descartada
+
+# 🔍 Habilitar os endpoints de monitoramento do Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+# 🌐 Porta da aplicação (mantém 8080, pois o Docker mapeia 8686:8080)
+server:
+  port: 8080
