@@ -9,20 +9,20 @@ pipeline {
     stage('Pull Image') {
       steps {
         echo 'Pulling image from Docker Hub'
-        sh 'docker-compose -f docker-compose.staging.yml pull'
+        bat 'docker-compose -f docker-compose.staging.yml pull'
       }
     }
     stage('Start container') {
       steps {
         echo 'Starting container(s)'
-        sh 'docker-compose -f docker-compose.staging.yml up -d --remove-orphans'
+        bat 'docker-compose -f docker-compose.staging.yml up -d --remove-orphans'
       }
     }
     stage('Health check') {
       steps {
         echo 'Checking application health on localhost...'
         // Customize the health URL and port if needed
-        sh '''
+        bat '''
         for i in 1 2 3 4 5; do
           sleep 3
           if curl -fsS http://localhost:8080/actuator/health; then
