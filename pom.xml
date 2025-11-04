@@ -40,6 +40,11 @@
 		</ns0:dependency>
 
 		<ns0:dependency>
+       <ns0:groupId>org.springframework.boot</ns0:groupId>
+       <ns0:artifactId>spring-boot-starter-actuator</ns0:artifactId>
+       </ns0:dependency>
+
+		<ns0:dependency>
 			<ns0:groupId>org.springframework.boot</ns0:groupId>
 			<ns0:artifactId>spring-boot-devtools</ns0:artifactId>
 			<ns0:scope>runtime</ns0:scope>
