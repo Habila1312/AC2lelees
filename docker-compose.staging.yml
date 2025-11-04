@@ -1,22 +1,32 @@
-version: '4'
+version: '3.8'
 
 services:
   database:
-    image: postgres
+    image: postgres:15
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: sapi
+    ports:
+      - "5432:5432"
     volumes:
       - db-volume:/var/lib/postgresql/data
 
   api:
     image: andprof/ac2_ca:latest
+    depends_on:
+      - database
     networks:
-      - default  # Certifique-se de que está usando a rede adequada
+      - default
     environment:
-      DB_HOST: database
       SPRING_PROFILES_ACTIVE: staging
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: sapi
+      DB_USER: postgres
+      DB_PASSWORD: postgres
     ports:
       - "8686:8080"
+
 volumes:
   db-volume:
