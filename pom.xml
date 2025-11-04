@@ -1,93 +1,89 @@
-<?xml version='1.0' encoding='utf-8'?>
-<ns0:project xmlns:ns0="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<ns0:modelVersion>4.0.0</ns0:modelVersion>
-	<ns0:parent>
-		<ns0:groupId>org.springframework.boot</ns0:groupId>
-		<ns0:artifactId>spring-boot-starter-parent</ns0:artifactId>
-		<ns0:version>3.3.4</ns0:version>
-		<ns0:relativePath /> 
-	</ns0:parent>
-	<ns0:groupId>ac2_project.example</ns0:groupId>
-	<ns0:artifactId>alunos-avaliacoes</ns0:artifactId>
-	<ns0:version>0.0.1-SNAPSHOT</ns0:version>
-	<ns0:name>ac2_ca</ns0:name>
-	<ns0:description>Demo project for Spring Boot</ns0:description>
-	<ns0:url />
-	<ns0:licenses>
-		<ns0:license />
-	</ns0:licenses>
-	<ns0:developers>
-		<ns0:developer />
-	</ns0:developers>
-	<ns0:scm>
-		<ns0:connection />
-		<ns0:developerConnection />
-		<ns0:tag />
-		<ns0:url />
-	</ns0:scm>
-	<ns0:properties>
-		<ns0:java.version>17</ns0:java.version>
-		 <ns0:maven.compiler.target>17</ns0:maven.compiler.target>
-	</ns0:properties>
-	<ns0:dependencies>
-		<ns0:dependency>
-			<ns0:groupId>org.springframework.boot</ns0:groupId>
-			<ns0:artifactId>spring-boot-starter-data-jpa</ns0:artifactId>
-		</ns0:dependency>
-		<ns0:dependency>
-			<ns0:groupId>org.springframework.boot</ns0:groupId>
-			<ns0:artifactId>spring-boot-starter-web</ns0:artifactId>
-		</ns0:dependency>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.3.4</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>ac2_project.example</groupId>
+	<artifactId>ac2_ca</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>ac2_ca</name>
+	<description>Demo project for Spring Boot</description>
+	<url/>
+	<licenses>
+		<license/>
+	</licenses>
+	<developers>
+		<developer/>
+	</developers>
+	<scm>
+		<connection/>
+		<developerConnection/>
+		<tag/>
+		<url/>
+	</scm>
+	<properties>
+		<java.version>17</java.version>
+		 <maven.compiler.target>17</maven.compiler.target>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
-		<ns0:dependency>
-       <ns0:groupId>org.springframework.boot</ns0:groupId>
-       <ns0:artifactId>spring-boot-starter-actuator</ns0:artifactId>
-       </ns0:dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-		<ns0:dependency>
-			<ns0:groupId>org.springframework.boot</ns0:groupId>
-			<ns0:artifactId>spring-boot-devtools</ns0:artifactId>
-			<ns0:scope>runtime</ns0:scope>
-			<ns0:optional>true</ns0:optional>
-		</ns0:dependency>
-		<ns0:dependency>
-			<ns0:groupId>com.h2database</ns0:groupId>
-			<ns0:artifactId>h2</ns0:artifactId>
-			<ns0:scope>runtime</ns0:scope>
-		</ns0:dependency>
-		<ns0:dependency>
-			<ns0:groupId>org.postgresql</ns0:groupId>
-			<ns0:artifactId>postgresql</ns0:artifactId>
-			<ns0:scope>runtime</ns0:scope>
-		</ns0:dependency>
-		<ns0:dependency>
-			<ns0:groupId>org.projectlombok</ns0:groupId>
-			<ns0:artifactId>lombok</ns0:artifactId>
-			<ns0:optional>true</ns0:optional>
-		</ns0:dependency>
-		<ns0:dependency>
-			<ns0:groupId>org.springframework.boot</ns0:groupId>
-			<ns0:artifactId>spring-boot-starter-test</ns0:artifactId>
-			<ns0:scope>test</ns0:scope>
-		</ns0:dependency>
-	</ns0:dependencies>
-
-	<ns0:build>
-		<ns0:plugins>
-			<ns0:plugin>
-				<ns0:groupId>org.springframework.boot</ns0:groupId>
-				<ns0:artifactId>spring-boot-maven-plugin</ns0:artifactId>
-				<ns0:configuration>
-					<ns0:excludes>
-						<ns0:exclude>
-							<ns0:groupId>org.projectlombok</ns0:groupId>
-							<ns0:artifactId>lombok</ns0:artifactId>
-						</ns0:exclude>
-					</ns0:excludes>
-				</ns0:configuration>
-			</ns0:plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
 			
-		</ns0:plugins>
-	</ns0:build>
+		</plugins>
+	</build>
 
-</ns0:project>
+</project>
