@@ -1,0 +1,44 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('Pull Image') {
+      steps {
+        echo 'Pulling image from Docker Hub'
+        sh 'docker-compose -f docker-compose.staging.yml pull'
+      }
+    }
+    stage('Start container') {
+      steps {
+        echo 'Starting container(s)'
+        sh 'docker-compose -f docker-compose.staging.yml up -d --remove-orphans'
+      }
+    }
+    stage('Health check') {
+      steps {
+        echo 'Checking application health on localhost...'
+        // Customize the health URL and port if needed
+        sh '''
+        for i in 1 2 3 4 5; do
+          sleep 3
+          if curl -fsS http://localhost:8080/actuator/health; then
+            echo "App is healthy"
+            exit 0
+          fi
+        done
+        echo "Health check failed" >&2
+        exit 1
+        '''
+      }
+    }
+  }
+  post {
+    always {
+      echo 'Staging pipeline finished'
+    }
+  }
+}
