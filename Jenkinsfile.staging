@@ -25,21 +25,22 @@ pipeline {
         stage('Health check') {
             steps {
                 echo 'Checking application health on localhost...'
-                // Versão adaptada para Windows
-                bat '''
-                @echo off
-                setlocal enabledelayedexpansion
-                for /L %%i in (1,1,5) do (
-                    curl -f http://localhost:8080/actuator/health >nul 2>&1
-                    if !errorlevel! equ 0 (
-                        echo Application is healthy!
-                        exit /b 0
-                    )
-                    echo Attempt %%i failed, retrying...
-                    timeout /t 5 >nul
-                )
-                echo Application health check failed after 5 attempts.
-                exit /b 1
+                powershell '''
+                $maxAttempts = 5
+                for ($i = 1; $i -le $maxAttempts; $i++) {
+                    try {
+                        $response = Invoke-WebRequest -Uri "http://localhost:8080/actuator/health" -UseBasicParsing -TimeoutSec 5
+                        if ($response.StatusCode -eq 200) {
+                            Write-Host "✅ Application is healthy!"
+                            exit 0
+                        }
+                    } catch {
+                        Write-Host "Attempt $i failed, retrying in 5 seconds..."
+                        Start-Sleep -Seconds 5
+                    }
+                }
+                Write-Host "❌ Application health check failed after $maxAttempts attempts."
+                exit 1
                 '''
             }
         }
