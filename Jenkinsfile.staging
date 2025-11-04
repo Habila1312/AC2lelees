@@ -29,7 +29,7 @@ pipeline {
                 $maxAttempts = 5
                 for ($i = 1; $i -le $maxAttempts; $i++) {
                     try {
-                        $response = Invoke-WebRequest -Uri "http://localhost:8080/actuator/health" -UseBasicParsing -TimeoutSec 5
+                        $response = Invoke-WebRequest -Uri "http://localhost:8686/actuator/health" -UseBasicParsing -TimeoutSec 5
                         if ($response.StatusCode -eq 200) {
                             Write-Host "✅ Application is healthy!"
                             exit 0
