@@ -1,44 +1,53 @@
 pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Pull Image') {
+            steps {
+                echo 'Pulling image from Docker Hub'
+                bat 'docker-compose -f docker-compose.staging.yml pull'
+            }
+        }
+
+        stage('Start container') {
+            steps {
+                echo 'Starting container(s)'
+                bat 'docker-compose -f docker-compose.staging.yml up -d --remove-orphans'
+            }
+        }
+
+        stage('Health check') {
+            steps {
+                echo 'Checking application health on localhost...'
+                // Versão adaptada para Windows
+                bat '''
+                @echo off
+                setlocal enabledelayedexpansion
+                for /L %%i in (1,1,5) do (
+                    curl -f http://localhost:8080/actuator/health >nul 2>&1
+                    if !errorlevel! equ 0 (
+                        echo Application is healthy!
+                        exit /b 0
+                    )
+                    echo Attempt %%i failed, retrying...
+                    timeout /t 5 >nul
+                )
+                echo Application health check failed after 5 attempts.
+                exit /b 1
+                '''
+            }
+        }
     }
-    stage('Pull Image') {
-      steps {
-        echo 'Pulling image from Docker Hub'
-        bat 'docker-compose -f docker-compose.staging.yml pull'
-      }
+
+    post {
+        always {
+            echo 'Staging pipeline finished'
+        }
     }
-    stage('Start container') {
-      steps {
-        echo 'Starting container(s)'
-        bat 'docker-compose -f docker-compose.staging.yml up -d --remove-orphans'
-      }
-    }
-    stage('Health check') {
-      steps {
-        echo 'Checking application health on localhost...'
-        // Customize the health URL and port if needed
-        bat '''
-        for i in 1 2 3 4 5; do
-          sleep 3
-          if curl -fsS http://localhost:8080/actuator/health; then
-            echo "App is healthy"
-            exit 0
-          fi
-        done
-        echo "Health check failed" >&2
-        exit 1
-        '''
-      }
-    }
-  }
-  post {
-    always {
-      echo 'Staging pipeline finished'
-    }
-  }
 }
